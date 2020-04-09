@@ -16,14 +16,18 @@ module test;
         $dumpfile("poco_r.vcd");
         $dumpvars(0, poco_inst);
         for(i=0;i<8;i++) $dumpvars(1,poco_inst.id_inst.register_inst.regis[i]); //show regster values
-        for(i=0;i<8;i++) $dumpvars(1,poco_inst.memory_inst.mem[i]); //show regster values
+        for(i=0;i<32;i++) $dumpvars(1,poco_inst.memory_inst.mem[i]); //show regster values
+        $dumpvars(1,poco_inst.memory_inst.mem[928]); 
+        $dumpvars(1,poco_inst.memory_inst.mem[929]); 
+        $dumpvars(1,poco_inst.memory_inst.mem[930]); 
+        $dumpvars(1,poco_inst.memory_inst.mem[931]); 
 
-        $dumplimit(100000000);
+        $dumplimit(1000000000);
         rst_n<=0;
         clk<=0;
     #25
         rst_n<=1;
-    #500
+    #1000000
         $finish;
     end
 

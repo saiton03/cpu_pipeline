@@ -1,8 +1,9 @@
 module poco_r(
     input wire clk,
-    input wire rst_n
+    input wire rst_n,
+    output wire [11:0] led
 );
-
+    
     //IF-ID
     wire [1:0] pc_sel;
     wire [15:0] jmp8;
@@ -25,7 +26,7 @@ module poco_r(
     //EX_WB
     wire [15:0] creg;
     wire [15:0] dreg;
-    wire rd_op_ex;
+    wire ld_op_ex;
 
     //WB_ID
     wire [15:0] rf_c;
@@ -108,6 +109,15 @@ module poco_r(
         .addr (mem_addr),
         .data_in (mem_in),
         .data_out (mem_out),
+        .we (st_op_id)
+    );
+    
+    led led_inst(
+        .clk (clk),
+        .rst_n (rst_n),
+        .addr (mem_addr),
+        .in (mem_in),
+        .led (led),
         .we (st_op_id)
     );
 

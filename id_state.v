@@ -109,7 +109,11 @@ module id_state (
       .sel (rd_sel),
       .out (breg_row)
    );
-
+   
+   assign jmpr = areg_in;
+   assign zerof = |areg_in;
+   assign posf = ~areg_in[15];
+   
    wire [15:0] areg_in, breg_in;
    wire selareg, selbreg;
    assign selareg = (rd_id == rd_mod) & (rwe_id == 1);
@@ -148,7 +152,7 @@ module id_state (
           st_op_id<=0;
           ld_op_id<=0;
           com_id<=3'h0;
-          rwe_id<=3'h0;
+          rwe_id<=0;
       end else begin
           areg<=areg_in;
           breg<=breg_in;

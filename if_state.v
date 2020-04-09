@@ -10,9 +10,9 @@ module if_state (
     output wire [15:0] pc_next
 );
 
-    input wire [15:0] pc_diff;
-    input wire [15:0] pc_normal;
-    input wire [15:0] pc_in;
+    wire [15:0] pc_diff;
+    wire [15:0] pc_normal;
+    wire [15:0] pc_in;
 
     sel3 sel_pcdiff(
         .in0 (16'h1),

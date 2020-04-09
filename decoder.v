@@ -33,8 +33,8 @@ module decoder (
     always @(*) begin
         case(opcode) 
             OP_REG : com_sel = (func == F_JALR)? 2'b01:2'b00;
-            OP_LDI, OP_LDIU, OP_LDHI : com_sel = 2'b10;
-            default : com_sel = 2'b01;
+            OP_LDI, OP_LDIU, OP_LDHI : com_sel = 2'b01;
+            default : com_sel = 2'b10;
         endcase
     end
     
@@ -43,7 +43,7 @@ module decoder (
             OP_REG : alu_bsel = 2'b00;
             OP_LDI, OP_ADDI : alu_bsel = 2'b01;
             OP_LDHI : alu_bsel = 2'b11;
-            default : alu_bsel = 2'b01;
+            default : alu_bsel = 2'b10;
         endcase
     end
     
@@ -52,7 +52,7 @@ module decoder (
     always @(*) begin
         if(opcode==OP_REG) begin
             case(func)
-                F_ST, F_JR, F_SB, F_EINT, F_RTI : rwe = 0;
+                F_NOP, F_ST, F_JR, F_SB, F_EINT, F_RTI : rwe = 0;
                 default : rwe = 1;
             endcase
         end else begin
